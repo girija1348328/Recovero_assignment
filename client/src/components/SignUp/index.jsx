@@ -91,7 +91,7 @@ const Signup =()=>{
                 />
                      <input 
                     type='text' 
-                    placeholder='Role' 
+                    placeholder='Role(Admin & member)' 
                     name='role' 
                     onChange={handleChange}
                     value={data.role}
