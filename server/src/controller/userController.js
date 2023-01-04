@@ -19,14 +19,8 @@ const userLogin = async function(req,res){
         let userName = req.body.email;
         let password = req.body.password;
 
-        let data = req.body
-        // if (!validator.isValidRequestBody(data)) return res.status(400).send({ status: false, message: "data in request body is required" });
-        // if (!validator.valid(userName)) return res.status(400).send({ status: false, message: "email is required...!" })
-        // if (!validator.valid(password)) return res.status(400).send({ status: false, message: "password is required.!" })
-
         let user = await userModel.findOne({ email: userName, password: password });
         if (!user) return res.status(400).send({ status: false, msg: "username or the password is not correct", });
-
 
         //after successfully creation of login jwt token will be created
 
@@ -40,8 +34,8 @@ const userLogin = async function(req,res){
             },
             "recovereo"
         );
-        res.setHeader("x-api-key", token);
-        res.status(200).send({ status: true, message: "Login successful", token: token });
+        res.setHeader("x-access-token", token);
+        res.status(200).send({ status: true, message: "Login successful", user: token, data: user });
     }
     catch (err) {
         return res.status(500).send({ status: false, message: err.message })
